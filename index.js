@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const exphbs = require("express-handlebars");
 const Post = require("./models/post");
+const User = require("./models/user");
 
 const PORT = 8080;
 
@@ -26,6 +27,16 @@ app.get("/signup", async (req, res) => {
 
 app.get("/posts", async (req, res) => {
   let posts = await Post.all();
+  let users = await User.all();
+
+  posts.map(post => {
+    users.map(user => {
+      if (user.id === post.user_id) {
+        post.nickname = user.nickname;
+      }
+    });
+  });
+
   posts.reverse();
   res.render("posts", { posts });
 });
