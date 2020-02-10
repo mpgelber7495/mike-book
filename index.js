@@ -14,6 +14,16 @@ app.use(express.urlencoded());
 app.use(morgan("dev"));
 app.use(require("./routes"));
 
+app.get("/", async (req, res) => {
+  // const lists = await List.all();
+  res.render("login");
+});
+
+app.get("/signup", async (req, res) => {
+  // const lists = await List.all();
+  res.render("signup");
+});
+
 app.listen(process.env.PORT || PORT, () => {
   console.log(`server running on ${process.env.PORT || PORT}`);
 });
