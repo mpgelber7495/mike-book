@@ -29,10 +29,13 @@
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation. We hide it in small screens. -->
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
-                    <a class="mdl-navigation__link" href="">Link</a>
-                    <a class="mdl-navigation__link" href="">Link</a>
-                    <a class="mdl-navigation__link" href="">Link</a>
-                    <a class="mdl-navigation__link" href="">Link</a>
+                    {{!-- <a class="mdl-navigation__link" href="">Logout</a> --}}
+
+                    <a class="mdl-navigation__link account_circle" id="nickname-holder"></a>
+                    <div class="material-icons mdl-badge mdl-badge--overlap">account_circle</div>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="logOut()"
+                        hidden="true" id="logOut">Log Out</button>
+
                 </nav>
             </div>
         </header>
@@ -45,11 +48,26 @@
                 <a class="mdl-navigation__link" href="">Link</a>
             </nav>
         </div>
-        <main class="mdl-layout__content main-container" style="display:flex;justify-content:center;">
+        <main class="mdl-layout__content" style="display:flex;justify-content:center;">
             <div class="page-content ">{{{body}}}</div>
         </main>
     </div>
 
 </body>
+
+<script>
+    function logOut() {
+        localStorage.removeItem("userObj")
+        window.location.href = "./"
+    }
+    if (localStorage.getItem("userObj")) {
+        let userObj = JSON.parse(localStorage.getItem("userObj"))
+        document.getElementById("logOut").hidden = false
+        $("#nickname-holder").html(userObj.nickname)
+    } else {
+        $("#nickname-holder").html("Please login")
+    }
+
+</script>
 
 </html>
