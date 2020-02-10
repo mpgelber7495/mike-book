@@ -2,12 +2,15 @@
 
 USE mike_book;
 
+DELETE TABLE users;
 CREATE TABLE users (
     id INT NOT NULL AUTO_INCREMENT,
     email VARCHAR(50) NOT NULL,
+    nickname VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL,
     primary key(id)
 );
+
 
 CREATE TABLE posts (
     id INT NOT NULL AUTO_INCREMENT,

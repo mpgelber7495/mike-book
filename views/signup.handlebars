@@ -11,6 +11,10 @@
                         <label class="mdl-textfield__label" for="username">Email</label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" id="nickname" />
+                        <label class="mdl-textfield__label" for="nickname">Nick Name</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield">
                         <input class="mdl-textfield__input" type="password" id="userpass" />
                         <label class="mdl-textfield__label" for="userpass">Password</label>
                     </div>
@@ -32,12 +36,14 @@
 <script>
     function signup() {
         let user = document.getElementById("username").value;
+        let nickname = document.getElementById("nickname").value;
         let pass = document.getElementById("userpass").value;
         let confirmPass = document.getElementById("confirmpass").value;
         if (pass === confirmPass) {
             let userObj = {}
             userObj.email = user;
             userObj.password = pass;
+            userObj.nickname = nickname;
             fetch("./api/users", {
                 headers: {
                     'Accept': 'application/json',
