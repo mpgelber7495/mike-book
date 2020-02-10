@@ -1,0 +1,55 @@
+<body>
+    <form action="#">
+        <div class="mdl-textfield mdl-js-textfield">
+            <textarea class="mdl-textfield__input" type="text" rows="3" id="post"></textarea>
+            <label class="mdl-textfield__label" for="post">Text lines...</label>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+            <button onclick="addNewPost()" type="button"
+                class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">ADD
+                NEW
+                POST</button>
+        </div>
+    </form>
+    {{#each posts}}
+    <div class="mdl-card mdl-shadow--4dp">
+        <div class="mdl-card__media">
+        </div>
+        <div class="mdl-card__supporting-text bold">
+            {{this.content}}
+        </div>
+        <div class="mdl-card__supporting-text">
+            {{this.created_on}}
+        </div>
+
+    </div>
+    {{/each}}
+
+</body>
+
+
+<script>
+    function addNewPost() {
+        let post = document.getElementById("post").value;
+        let user = localStorage.getItem("userObj")
+        let userObj = JSON.parse(user)
+        let postObject = {}
+        postObject.content = post;
+        postObject.user_id = userObj.id
+        console.log(postObject)
+        fetch("./api/posts", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify(postObject)
+        }).then(function (response) {
+            console.log(userObj)
+            window.location.reload()
+
+
+
+        })
+    }
+</script>

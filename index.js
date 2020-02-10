@@ -1,7 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const exphbs = require("express-handlebars");
-// const List = require("./models/list");
+const Post = require("./models/post");
 
 const PORT = 8080;
 
@@ -25,7 +25,9 @@ app.get("/signup", async (req, res) => {
 });
 
 app.get("/posts", async (req, res) => {
-  res.render("posts");
+  let posts = await Post.all();
+  posts.reverse();
+  res.render("posts", { posts });
 });
 
 app.listen(process.env.PORT || PORT, () => {

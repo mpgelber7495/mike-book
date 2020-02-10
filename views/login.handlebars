@@ -42,8 +42,12 @@
             matchedUsers.map(user => {
                 if (user.password === pass) {
 
-                    console.log("Wahooo")
                     loggedIn = true
+                    window.location.href = "./posts"
+                    let confirmedUser = {}
+                    confirmedUser.email = user.email;
+                    confirmedUser.id = user.id
+                    localStorage.setItem('userObj', JSON.stringify(confirmedUser))
                 }
             })
             if (loggedIn === false) {
