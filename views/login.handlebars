@@ -17,7 +17,8 @@
                 </form>
             </div>
             <div class="mdl-card__actions mdl-card--border">
-                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Log in</button>
+                <button onclick="login()" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Log
+                    in</button>
             </div>
             <div class="mdl-card__actions mdl-card--border">
                 <a href="/signup"><button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">SIGN
@@ -26,3 +27,32 @@
         </div>
     </main>
 </div>
+
+
+<script>
+    function login() {
+        let loggedIn = false
+        let userEntered = document.getElementById("username").value;
+        let pass = document.getElementById("userpass").value;
+
+        $.get("./api/users", function (data, status) {
+            console.log(data.users)
+            let users = data.users
+            let matchedUsers = users.filter(user => user.email === userEntered)
+            matchedUsers.map(user => {
+                if (user.password === pass) {
+
+                    console.log("Wahooo")
+                    loggedIn = true
+                }
+            })
+            if (loggedIn === false) {
+                alert("Hmm something isn't right. Try again")
+            }
+
+        })
+
+
+    }
+
+</script>

@@ -24,6 +24,10 @@ app.get("/signup", async (req, res) => {
   res.render("signup");
 });
 
+app.get("/posts", async (req, res) => {
+  res.render("posts");
+});
+
 app.listen(process.env.PORT || PORT, () => {
   console.log(`server running on ${process.env.PORT || PORT}`);
 });
